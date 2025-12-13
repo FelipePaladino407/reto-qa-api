@@ -1,0 +1,17 @@
+=== Para pytest ===
+
+. Anotaciones interesantes:
+
+-> pytest -q => test quiet, es decir, lo hace rapidamente y devuelve una respuesta rapida al momento.
+
+-> pytest -v => verbose, muestra el nombre de cada test.
+
+-> pytest -k pikachu => corre test que coincidan.
+
+-> pytest -x => frena en el primer fallo.
+
+-> pytest -s => muestra prints.
+
+-> pytest test_pokemonApi_anda => ejecuta ese test en particular (es un ejemplo).
+
+
