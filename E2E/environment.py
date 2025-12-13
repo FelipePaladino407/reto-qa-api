@@ -1,4 +1,4 @@
-from playwright.sync_api import page
+from playwright.sync_api import sync_playwright
 
 def before_scenario(context, scenenario):
     #"Segun la pagina 'medium.com', esto es para inicializar playwright antes de cualquier test"

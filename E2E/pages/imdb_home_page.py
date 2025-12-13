@@ -9,5 +9,5 @@ class ImdbHomePage:
     def search_movie(self, movie_name: str):
         self.page.fill(self.search_box, movie_name)
         self.page.click(self.search_button)
-        self.page.wait_for_navigation()
+        self.page.wait_for_function()
     
