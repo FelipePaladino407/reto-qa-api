@@ -4,25 +4,33 @@ from pages.imdb_title_page import ImdbTitlePage
 
 @given('estoy en la pagina principal de Imdb')
 def step_impl(context):
-    context.page.goto('https://www.imdb.com')
-    context.home_page = ImdbHomePage(context.page)  # Creo instancia de la pagina pricinial uuu
+    context.page.goto('https://www.imdb.com', wait_until="domcontentloaded")
+    context.home_page = ImdbHomePage(context.page)
 
 @when('busco la pelicula "{movie_name}"')
 def step_impl(context, movie_name):
-    context.home_page.search_movie(movie_name)  # Usao el método de la página principal
+    context.home_page.search_movie(movie_name)
+    context.title_page = ImdbTitlePage(context.page)  
 
 @when('entro a la pagina de la pelicula')
 def step_impl(context):
-    context.title_page = ImdbTitlePage(context.page)  # Creo la instancia de la pagina del coso este
+    # Por si las moscas, un assert (auqneu ya deberia de haber entrado con el primer click):
+    assert "/title/" in context.page.url
 
-@then('veo que aparece el director "{director_name}"')
+@then('Veo que aparece el director "{director_name}"')
 def step_impl(context, director_name):
-    director = context.title_page.get_director()  # Obtener el director
-    assert director_name.lower() in director.lower(), f"Se esperaba que el director fuera {director_name}, pero fue {director}"
+    director = context.title_page.get_director()
+    assert director_name.lower() in director.lower(), (
+        f"Se esperaba {director_name}, pero fue {director}"
+    )
 
-@then('la pelicula tiene una calificacion superior a {min_rating}')
+@then('La pelicula tiene una calificacion superior a {min_rating}')
 def step_impl(context, min_rating):
-    rating = context.title_page.get_rating()  # Obtener la calificación
+    rating = context.title_page.get_rating()
     assert rating > float(min_rating), f"La calificación ({rating}) es menor que {min_rating}"
+
+@then('guardo una captura de pantalla')
+def step_impl(context):
+    context.page.screenshot(path="evidencia_imdb.png", full_page=True)
 
 
