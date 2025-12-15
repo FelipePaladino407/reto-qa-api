@@ -29,6 +29,12 @@ def step_impl(context, min_rating):
     rating = context.title_page.get_rating()
     assert rating > float(min_rating), f"La calificación ({rating}) es menor que {min_rating}"
 
+@then('Veo que aparece el actor "{actor_name}"')
+def step_impl(context, actor_name):
+    assert context.title_page.has_actor(actor_name), (
+            f"No se puedo hallar al actor {actor_name} en el cast."
+            )
+
 @then('guardo una captura de pantalla')
 def step_impl(context):
     context.page.screenshot(path="evidencia_imdb.png", full_page=True)

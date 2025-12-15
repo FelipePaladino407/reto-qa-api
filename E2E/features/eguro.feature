@@ -8,3 +8,4 @@ Feature: Operacion Grinch
     And entro a la pagina de la pelicula
     Then Veo que aparece el director "Chris Columbus"
     And La pelicula tiene una calificacion superior a 7.0
+    And Veo que aparece el actor "Macaulay Culkin"
